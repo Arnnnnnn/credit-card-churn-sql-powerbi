@@ -1,0 +1,82 @@
+
+=== Q1: Churn rate by card category ===
+Card_Category | customers | churned | churn_rate_pct
+Platinum | 20 | 5 | 25.0
+Gold | 116 | 21 | 18.1
+Blue | 9436 | 1519 | 16.1
+Silver | 555 | 82 | 14.77
+
+=== Q2: Churn rate for customers holding more than 4 products with the bank ===
+customers | churned | churn_rate_pct
+3757 | 423 | 11.26
+
+=== Q3: Churn rate for customers holding 2 or fewer products ===
+customers | churned | churn_rate_pct
+2153 | 579 | 26.89
+
+=== Q4: Churn rate by income category (JOIN customers + accounts) ===
+Income_Category | customers | churned | churn_rate_pct
+$120K + | 727 | 126 | 17.33
+Less than $40K | 3561 | 612 | 17.19
+Unknown | 1112 | 187 | 16.82
+$80K - $120K | 1535 | 242 | 15.77
+$40K - $60K | 1790 | 271 | 15.14
+$60K - $80K | 1402 | 189 | 13.48
+
+=== Q5: Which income bands churn above the overall average? (CTE + HAVING) ===
+Income_Category | customers | churn_rate_pct
+$120K + | 727 | 17.33
+Less than $40K | 3561 | 17.19
+Unknown | 1112 | 16.82
+
+=== Q6: Churn rate by age band (CASE WHEN) ===
+age_band | customers | churn_rate_pct
+Under 30 | 195 | 8.72
+30s | 1841 | 14.18
+40s | 4561 | 16.93
+50s | 2998 | 16.88
+60+ | 532 | 13.35
+
+=== Q7: Does inactivity predict churn? (JOIN activity + accounts, HAVING) ===
+months_inactive | customers | churn_rate_pct
+1 | 2233 | 4.48
+2 | 3282 | 15.39
+3 | 3846 | 21.48
+4 | 435 | 29.89
+5 | 178 | 17.98
+6 | 124 | 15.32
+
+=== Q8: Top 3 customers by transaction amount in each card category (window function RANK) ===
+Card_Category | rnk | CLIENTNUM | Total_Trans_Amt
+Blue | 1 | 718140783 | 18484
+Blue | 2 | 717642633 | 17995
+Blue | 3 | 801036033 | 17744
+Gold | 1 | 718455633 | 16328
+Gold | 2 | 715713408 | 15853
+Gold | 3 | 766769058 | 15817
+Platinum | 1 | 714949758 | 16712
+Platinum | 2 | 709814883 | 15513
+Platinum | 3 | 771626283 | 15033
+Silver | 1 | 713758758 | 17628
+Silver | 2 | 788230158 | 16715
+Silver | 3 | 711686658 | 16579
+
+=== Q9: Customers split into 10 equal groups by credit utilization, with churn rate in each (NTILE) ===
+decile | customers | min_util | max_util | churn_rate_pct
+1 | 1013 | 0.0 | 0.0 | 27.54
+2 | 1013 | 0.0 | 0.0 | 40.08
+3 | 1013 | 0.0 | 0.051 | 29.71
+4 | 1013 | 0.051 | 0.1 | 8.19
+5 | 1013 | 0.1 | 0.176 | 9.38
+6 | 1013 | 0.176 | 0.278 | 9.48
+7 | 1013 | 0.278 | 0.43 | 10.46
+8 | 1012 | 0.43 | 0.574 | 6.52
+9 | 1012 | 0.574 | 0.707 | 6.03
+10 | 1012 | 0.708 | 0.999 | 13.24
+
+=== Q10: Risk segments combining low activity and inactivity (CASE WHEN on two columns) ===
+segment | customers | churn_rate_pct
+Low activity + 3+ months inactive | 1962 | 43.73
+Low activity only | 2085 | 25.56
+3+ months inactive only | 2621 | 5.68
+Neither | 3459 | 2.52
